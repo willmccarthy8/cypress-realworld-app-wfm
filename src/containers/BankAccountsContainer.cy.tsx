@@ -1,4 +1,4 @@
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route } from "react-router-dom";
 import { interpret, Machine } from "xstate";
 import BankAccountsContainer from "./BankAccountsContainer";
 import { authMachine } from "../machines/authMachine";
@@ -128,10 +128,12 @@ describe("BankAccountsContainer", () => {
     const { testAuthService, testBankAccountsService } = setupServices();
     cy.mount(
       <MemoryRouter initialEntries={["/bankaccounts/new"]}>
-        <BankAccountsContainer
-          authService={testAuthService}
-          bankAccountsService={testBankAccountsService}
-        />
+        <Route path="/bankaccounts*">
+          <BankAccountsContainer
+            authService={testAuthService}
+            bankAccountsService={testBankAccountsService}
+          />
+        </Route>
       </MemoryRouter>
     );
     cy.contains("Create Bank Account").should("exist");
