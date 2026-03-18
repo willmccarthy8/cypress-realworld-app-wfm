@@ -21,7 +21,7 @@ const mockUser = {
 const mockBankAccounts = [
   {
     id: "RskoB7r4Bic",
-    uuid: "a]bf7e7a-6e45-4c67-8b4a-1c9e7b3a5d6f",
+    uuid: "abf7e7a0-6e45-4c67-8b4a-1c9e7b3a5d6f",
     userId: "t45AiwidW",
     bankName: "O'Hara - Macejkovic Bank",
     accountNumber: "6123387981",

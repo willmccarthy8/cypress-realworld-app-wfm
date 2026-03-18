@@ -1,5 +1,3 @@
-import { MemoryRouter } from "react-router-dom";
-
 describe("AppOkta Container", () => {
   beforeEach(() => {
     cy.intercept("GET", "http://localhost:3001/checkAuth", {

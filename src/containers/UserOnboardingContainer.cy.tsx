@@ -155,7 +155,7 @@ describe("UserOnboardingContainer", () => {
     cy.get("[data-test=bankaccount-accountNumber-input]").should("exist");
   });
 
-  it("should not show the dialog when bank accounts exist and onboarding is done", () => {
+  it("should not show the dialog visibly when bank accounts exist and onboarding is done", () => {
     const authService = createAuthService();
     const bankAccountsService = createBankAccountsService(
       [
@@ -183,8 +183,8 @@ describe("UserOnboardingContainer", () => {
       </MemoryRouter>
     );
 
-    // When bank accounts exist and user is past onboarding, dialog should not be open
-    // The dialog's open prop should be false, so MUI won't render it visibly
-    cy.get("[data-test=user-onboarding-dialog]").should("exist");
+    // When bank accounts exist and onboarding is complete, the MUI Dialog's open prop
+    // is false, so its content should not be visible to the user
+    cy.get("[data-test=user-onboarding-dialog-title]").should("not.be.visible");
   });
 });
