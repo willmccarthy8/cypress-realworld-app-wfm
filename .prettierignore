@@ -4,5 +4,6 @@
 data
 build
 coverage
+coverage-unit
 amplify/*
 aws-exports*

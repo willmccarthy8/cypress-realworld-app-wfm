@@ -203,7 +203,9 @@ describe("comment and notification validators", () => {
   test("requires comment content to be a string", async () => {
     const app = validate([isCommentValidator]);
 
-    expect((await request(app).post("/comments").send({ content: "nice" })).body.errors).toEqual([]);
+    expect((await request(app).post("/comments").send({ content: "nice" })).body.errors).toEqual(
+      []
+    );
     expect(
       errorParams((await request(app).post("/comments").send({ content: 42 })).body.errors)
     ).toEqual(["content"]);
@@ -230,7 +232,9 @@ describe("comment and notification validators", () => {
       (await request(app).patch("/notifications/1").send({ isRead: true })).body.errors
     ).toEqual([]);
     expect(
-      errorParams((await request(app).patch("/notifications/1").send({ isRead: "yes" })).body.errors)
+      errorParams(
+        (await request(app).patch("/notifications/1").send({ isRead: "yes" })).body.errors
+      )
     ).toEqual(["isRead"]);
   });
 });

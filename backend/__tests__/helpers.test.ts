@@ -4,10 +4,7 @@ import request from "supertest";
 import { check } from "express-validator";
 import { ensureAuthenticated, validateMiddleware } from "../helpers";
 
-const appWith = (
-  middleware: express.RequestHandler,
-  beforeMiddleware?: express.RequestHandler
-) => {
+const appWith = (middleware: express.RequestHandler, beforeMiddleware?: express.RequestHandler) => {
   const app = express();
   app.use(express.json());
   if (beforeMiddleware) app.use(beforeMiddleware);
@@ -20,7 +17,7 @@ const appWith = (
 describe("ensureAuthenticated", () => {
   test("continues when the request is authenticated", async () => {
     const app = appWith(ensureAuthenticated, (req, _res, next) => {
-      req.isAuthenticated = () => true;
+      req.isAuthenticated = (() => true) as typeof req.isAuthenticated;
       req.user = { id: "user-1" } as any;
       next();
     });
@@ -33,7 +30,7 @@ describe("ensureAuthenticated", () => {
 
   test("maps a provider sub claim onto the user id", async () => {
     const app = appWith(ensureAuthenticated, (req, _res, next) => {
-      req.isAuthenticated = () => true;
+      req.isAuthenticated = (() => true) as typeof req.isAuthenticated;
       req.user = { sub: "auth0|123" } as any;
       next();
     });
@@ -45,7 +42,7 @@ describe("ensureAuthenticated", () => {
 
   test("responds with 401 when the request is not authenticated", async () => {
     const app = appWith(ensureAuthenticated, (req, _res, next) => {
-      req.isAuthenticated = () => false;
+      req.isAuthenticated = (() => false) as typeof req.isAuthenticated;
       next();
     });
 

@@ -121,7 +121,7 @@ describe("auth", () => {
 
     expect(response.status).toEqual(302);
     expect(response.headers.location).toEqual("/");
-    expect(response.headers["set-cookie"].join()).toContain("connect.sid=;");
+    expect([response.headers["set-cookie"]].flat().join()).toContain("connect.sid=;");
   });
 
   test("POST /login extends the cookie lifetime when remembering the user", async () => {

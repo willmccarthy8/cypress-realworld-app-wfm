@@ -23,7 +23,7 @@ const buildApp = async () => {
   app.use(express.json());
   app.use(paginate.middleware(10));
   app.use((req, _res, next) => {
-    req.isAuthenticated = () => true;
+    req.isAuthenticated = (() => true) as typeof req.isAuthenticated;
     req.user = { id: "user-1" } as any;
     next();
   });

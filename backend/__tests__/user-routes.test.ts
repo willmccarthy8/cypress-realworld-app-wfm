@@ -28,7 +28,7 @@ const buildApp = async (currentUserId = "aBcD1234") => {
   const app = express();
   app.use(express.json());
   app.use((req, _res, next) => {
-    req.isAuthenticated = () => true;
+    req.isAuthenticated = (() => true) as typeof req.isAuthenticated;
     req.user = { id: currentUserId } as any;
     next();
   });

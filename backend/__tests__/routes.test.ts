@@ -30,7 +30,7 @@ const buildApp = async (path: string, modulePath: string) => {
   const app = express();
   app.use(express.json());
   app.use((req, _res, next) => {
-    req.isAuthenticated = () => true;
+    req.isAuthenticated = (() => true) as typeof req.isAuthenticated;
     req.user = { id: "user-1" } as any;
     next();
   });
@@ -274,9 +274,7 @@ describe("notification routes", () => {
   test("PATCH /notifications/:notificationId marks a notification read", async () => {
     const app = await buildApp("/notifications", "../notification-routes");
 
-    const response = await request(app)
-      .patch(`/notifications/${validId}`)
-      .send({ isRead: true });
+    const response = await request(app).patch(`/notifications/${validId}`).send({ isRead: true });
 
     expect(response.status).toEqual(204);
     expect(db.updateNotificationById).toHaveBeenCalledWith("user-1", validId, { isRead: true });
