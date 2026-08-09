@@ -39,6 +39,8 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: "jsdom",
       setupFiles: "./src/setup-tests.js",
+      // src/aws-exports.js is generated, so unit tests resolve the committed mock instead
+      alias: [{ find: /^(.*)\/aws-exports$/, replacement: "/scripts/mock-aws-exports.js" }],
       exclude: ["node_modules", "cypress", "dist"],
       fileParallelism: false, // #1666: Run tests sequentially to avoid race conditions with shared database.json file.
       coverage: {
