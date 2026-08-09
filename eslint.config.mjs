@@ -5,7 +5,7 @@ import tseslint from 'typescript-eslint'
 import pluginCypress from 'eslint-plugin-cypress'
 
 export default defineConfig([
-  globalIgnores(['build/']),
+  globalIgnores(['build/', 'coverage-unit/']),
   {
     files: ['**/*.ts'],
     extends: [
