@@ -139,8 +139,12 @@ describe("amount formatting and math", () => {
   });
 
   test("determines whether the sender has sufficient funds", () => {
-    expect(hasSufficientFunds(user({ balance: 10_000 }), transaction({ amount: 2_500 }))).toBe(true);
-    expect(hasSufficientFunds(user({ balance: 1_000 }), transaction({ amount: 2_500 }))).toBe(false);
+    expect(hasSufficientFunds(user({ balance: 10_000 }), transaction({ amount: 2_500 }))).toBe(
+      true
+    );
+    expect(hasSufficientFunds(user({ balance: 1_000 }), transaction({ amount: 2_500 }))).toBe(
+      false
+    );
   });
 });
 
@@ -263,9 +267,9 @@ describe("date conversion helpers", () => {
   test("converts an ISO string to a full local date", () => {
     const date = isoStringToLocalDateFull(isoString);
 
-    expect([date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()]).toEqual([
-      14, 35, 45, 123,
-    ]);
+    expect([date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()]).toEqual(
+      [14, 35, 45, 123]
+    );
   });
 
   test("converts a local date back to an ISO string", () => {
