@@ -41,6 +41,23 @@ export default defineConfig(({ mode }) => {
       setupFiles: "./src/setup-tests.js",
       exclude: ["node_modules", "cypress", "dist"],
       fileParallelism: false, // #1666: Run tests sequentially to avoid race conditions with shared database.json file.
+      coverage: {
+        provider: "v8",
+        reportsDirectory: "coverage-unit",
+        reporter: ["text", "html", "json-summary"],
+        include: ["src/**/*.{ts,tsx}", "backend/**/*.ts"],
+        exclude: [
+          "src/models/*.ts",
+          "src/**/*.cy.{ts,tsx}",
+          "src/**/__tests__/**",
+          "src/index*.tsx",
+          "src/svgs/**",
+          "src/react-app-env.d.ts",
+          "src/setup-tests.js",
+          "src/setupProxy.js",
+          "backend/types.ts",
+        ],
+      },
     },
   };
 });
